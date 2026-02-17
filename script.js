@@ -10,6 +10,39 @@ let correctAnswer = "";
 let isPlaying = false;
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
+// ========== АУДИО ТРЕКЕР (Барлық дыбыстарды тоқтату) ==========
+window._activeAudios = [];
+
+function trackAudio(audio) {
+  window._activeAudios.push(audio);
+  audio.addEventListener('ended', () => {
+    window._activeAudios = window._activeAudios.filter(a => a !== audio);
+  });
+  audio.addEventListener('pause', () => {
+    window._activeAudios = window._activeAudios.filter(a => a !== audio);
+  });
+  return audio;
+}
+
+function stopAllAudio() {
+  // Stop all tracked Audio objects
+  window._activeAudios.forEach(audio => {
+    try {
+      audio.pause();
+      audio.currentTime = 0;
+    } catch (e) { }
+  });
+  window._activeAudios = [];
+
+  // Stop all <audio> elements in the page
+  document.querySelectorAll('audio').forEach(audio => {
+    try {
+      audio.pause();
+      audio.currentTime = 0;
+    } catch (e) { }
+  });
+}
+
 // ========== ДЫБЫС ЭФФЕКТІЛЕРІ ==========
 function playClick() { document.getElementById('clickSound').play().catch(e => { }); }
 function playSuccess() { document.getElementById('successSound').play().catch(e => { }); }
@@ -17,6 +50,9 @@ function playError() { document.getElementById('errorSound').play().catch(e => {
 
 // ========== ЭКРАНДАРДЫ АУЫСТЫРУ ==========
 function showScreen(screenId) {
+  // Барлық дыбыстарды тоқтату
+  stopAllAudio();
+
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(screenId).classList.add('active');
   window.scrollTo(0, 0);
@@ -1871,10 +1907,18 @@ function frogVictoryDance() {
 
 // ========== EXTENDED ALIPPE LOGIC (Appended) ==========
 
-// Global function to play word sound
+// Global function to play word sound from sounds/Alippe/words/
 window.playAlippeWordSound = function (letter, word) {
-  // Fallback: Play letter sound
-  playAlippeSoundLocal(letter);
+  if (word) {
+    const wordPath = `sounds/Alippe/words/${word}.mp3`;
+    const wordAudio = new Audio(wordPath);
+    wordAudio.play().catch(() => {
+      // Fallback: Play letter sound if word file not found
+      playAlippeSoundLocal(letter);
+    });
+  } else {
+    playAlippeSoundLocal(letter);
+  }
 };
 
 function initAlippeLocal() {
@@ -1958,6 +2002,7 @@ function initAlippeLocal() {
 
       let clickCount = 0;
       let clickTimer = null;
+      let soundTimer = null;
 
       item.onclick = () => {
         clickCount++;
@@ -1967,17 +2012,20 @@ function initAlippeLocal() {
         setTimeout(() => item.style.transform = "scale(1)", 150);
 
         if (clickCount === 1) {
-          // Play sound only on first click
-          playAlippeSoundLocal(itemData.letter);
+          // Delay sound so it can be cancelled on double-click
+          soundTimer = setTimeout(() => {
+            playAlippeSoundLocal(itemData.letter);
+          }, 250);
 
           clickTimer = setTimeout(() => {
             clickCount = 0;
           }, 400);
         } else if (clickCount === 2) {
           clearTimeout(clickTimer);
+          clearTimeout(soundTimer);
           clickCount = 0;
 
-          // Sound NOT played here, only panel opens
+          // Only panel opens, no letter sound
           showWordOnRightPanel(itemData);
 
           document.querySelectorAll('.alippe-item').forEach(i => i.classList.remove('expanded'));

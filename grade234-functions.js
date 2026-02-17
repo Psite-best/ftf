@@ -4,12 +4,15 @@
 // ========== 2-СЫНЫП ТАПСЫРМАЛАРЫ ==========
 
 // ========== ДЫБЫС ҰЗАҚТЫҒЫН ШЕКТЕУ ==========
-const MAX_AUDIO_DURATION_G234 = 3; // 3 секунд
+const MAX_AUDIO_DURATION_G234 = 5; // 5 секунд
 
 function limitAudioDurationG234(audioElement) {
   if (!audioElement) return;
 
-  // Ограничиваем воспроизведение до 3 секунд
+  // Трекерге қосу
+  if (typeof trackAudio === 'function') trackAudio(audioElement);
+
+  // Ограничиваем воспроизведение до 5 секунд
   const stopAudioAfterLimit = () => {
     setTimeout(() => {
       if (!audioElement.paused && audioElement.currentTime > 0) {
@@ -496,18 +499,11 @@ function playRandomNationalSong() {
   const chosen = songs[Math.floor(Math.random() * songs.length)];
   currentNationalSong = chosen;
 
-  const audioMap = {
-    'kazakh': 'kazakhSongAudio',
-    'russian': 'russianSongAudio',
-    'english': 'englishSongAudio'
-  };
-
-  const audio = document.getElementById(audioMap[chosen]);
-  if (audio) {
-    limitAudioDurationG234(audio);
-  } else {
+  const audio = new Audio(`sounds/national_songs/${chosen}.mp3`);
+  audio.onerror = () => {
     alert("Аудио файл табылмады! sounds/national_songs/" + chosen + ".mp3");
-  }
+  };
+  limitAudioDurationG234(audio);
 }
 
 function checkNationalSong(choice) {
@@ -790,11 +786,18 @@ function playSound(type) {
     audioPath = `sounds/syllables/word_${count}.mp3`;
   }
   else if (type === 'letter') {
-    const letters = ['s', 'sh', 'z', 'zh'];
+    const letters = ['с', 'ш', 'з', 'ж'];
     const letterCode = letters[Math.floor(Math.random() * letters.length)];
-    const letterMap = { 's': 'С', 'sh': 'Ш', 'z': 'З', 'zh': 'Ж' };
+    const letterMap = { 'с': 'С', 'ш': 'Ш', 'з': 'З', 'ж': 'Ж' };
     currentLetter = letterMap[letterCode];
-    audioPath = `sounds/letters/word_${letterCode}.mp3`;
+    // Play Alippe letter sound, fallback to letters folder
+    const alippePath = `sounds/Alippe/Alippe_${letterCode}.mp3`;
+    const fallbackPath = `sounds/letters/letter_${letterCode}.mp3`;
+    const audio = new Audio(alippePath);
+    audio.play().catch(() => {
+      new Audio(fallbackPath).play().catch(() => { });
+    });
+    return; // Already handled playback
   }
   else if (type === 'math') {
     const terms = ['plus', 'minus', 'more', 'less'];
@@ -811,13 +814,15 @@ function playSound(type) {
       const duration = durations[Math.floor(Math.random() * durations.length)];
       currentSoundDuration = duration;
       currentSoundIntensity = '';
-      audioPath = `sounds/sound_properties/duration_${duration}.mp3`;
+      const durationFileMap = { 'long': 'узак', 'short': 'кыска' };
+      audioPath = `sounds/voice_sipat/${durationFileMap[duration]}.mp3`;
     } else {
       const intensities = ['loud', 'quiet', 'calm'];
       const intensity = intensities[Math.floor(Math.random() * intensities.length)];
       currentSoundIntensity = intensity;
       currentSoundDuration = '';
-      audioPath = `sounds/sound_properties/intensity_${intensity}.mp3`;
+      const intensityFileMap = { 'loud': 'громкий', 'quiet': 'тихий', 'calm': 'тише' };
+      audioPath = `sounds/voice_sipat/${intensityFileMap[intensity]}.mp3`;
     }
   }
 
@@ -838,13 +843,14 @@ function playSound(type) {
     const syllables = [1, 2, 3];
     const syl = syllables[Math.floor(Math.random() * syllables.length)];
     currentStress = syl;
-    audioPath = `sounds/stress/stress_${syl}.mp3`;
+    audioPath = `sounds/ekpin/${syl}buin.mp3`;
   }
   else if (type === 'wordType') {
     const types = ['familiar', 'question', 'task'];
     const wordType = types[Math.floor(Math.random() * types.length)];
     currentWordType = wordType;
-    audioPath = `sounds/word_types/${wordType}.mp3`;
+    const wordFileMap = { 'familiar': 'tanis', 'question': 'question', 'task': 'task' };
+    audioPath = `sounds/wword/${wordFileMap[wordType]}.mp3`;
   }
   else if (type === 'appliance') {
     playRandomAppliance();
@@ -876,10 +882,11 @@ function playSound(type) {
     audioPath = `sounds/technical/${item === 'sewing' ? 'sewing_machine' : item}.mp3`;
   }
   else if (type === 'complexRhythm') {
-    const counts = [4, 5, 6];
+    const counts = [5, 6, 7];
     const count = counts[Math.floor(Math.random() * counts.length)];
     currentComplexRhythm = count;
-    audioPath = `sounds/complex_rhythms/rhythm_${count}.mp3`;
+    const rhythmFileMap = { 5: '5 хлопков', 6: '6 хлопок', 7: '7 хлопков' };
+    audioPath = `sounds/igrak/${rhythmFileMap[count]}.mp3`;
   }
   else if (type === 'direction') {
     // Use 3D spatial audio instead of mp3 files
@@ -889,11 +896,11 @@ function playSound(type) {
 
   if (audioPath) {
     const audio = new Audio(audioPath);
+    if (typeof trackAudio === 'function') trackAudio(audio);
     console.log('Playing:', audioPath);
 
     audio.addEventListener('error', () => {
       console.error("Audio not found:", audioPath);
-      // alert disabled to avoid spam, or enable if needed
     });
 
     limitAudioDurationG234(audio);
