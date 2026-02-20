@@ -837,7 +837,7 @@ function playSound(type) {
     const types = ['question', 'statement', 'exclamation'];
     const intType = types[Math.floor(Math.random() * types.length)];
     currentIntonation = intType;
-    audioPath = `sounds/intonation/${intType}.mp3`;
+    audioPath = `sounds/intonation/${intType}.mpeg`;
   }
   else if (type === 'stress') {
     const syllables = [1, 2, 3];
