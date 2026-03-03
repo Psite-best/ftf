@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="kk">
 
 <head>
@@ -309,14 +309,24 @@
               style="cursor: pointer; width:160px; height:160px; font-size:28px; background: linear-gradient(135deg, #FDB813 0%, #F5A623 100%);">
               0-сынып</div>
 
-            <!-- Two main subcategories for Grade 0 -->
-            <div class="radial-item" style="--angle: 90deg; --dist: 220px;" onclick="showScreen('grade0SoundsMenu')">
+            <!-- Four main subcategories for Grade 0 -->
+            <div class="radial-item" style="--angle: 0deg; --dist: 220px;" onclick="showScreen('grade0SoundsMenu')">
               <div>🔊</div>
               <p>Дыбыстар</p>
             </div>
-            <div class="radial-item" style="--angle: 270deg; --dist: 220px;" onclick="showScreen('grade0VoiceMenu')">
+            <div class="radial-item" style="--angle: 90deg; --dist: 220px;" onclick="showScreen('grade0VoiceMenu')">
               <div>🎤</div>
               <p>Дауыс</p>
+            </div>
+            <div class="radial-item" style="--angle: 180deg; --dist: 220px;"
+              onclick="showScreen('grade0DauyspenmMenu')">
+              <div>🗣️</div>
+              <p>Дауыспен жумыс</p>
+            </div>
+            <div class="radial-item" style="--angle: 270deg; --dist: 220px;"
+              onclick="showScreen('grade0DauysShakMenu')">
+              <div>📞</div>
+              <p>Дауыс шақыру</p>
             </div>
           </div>
           <!-- Back Button -->
@@ -445,6 +455,268 @@
           <!-- Back Button -->
           <button class="btn btn-secondary" onclick="playClick(); showScreen('grade0Menu')"
             style="position: absolute; bottom: 20px; left: 20px; z-index: 100;">⬅️ Артқа</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grade 0 - Дауыспен жумыс Menu -->
+    <div id="grade0DauyspenmMenu" class="screen">
+      <div class="task-flex-container" style="display: flex; height: 100vh; width: 100%; overflow: hidden;">
+        <!-- Left: Alippe -->
+        <div class="alippe-panel">
+          <div class="alippe-header">Әліппе</div>
+          <div class="alippe-grid"></div>
+        </div>
+        <!-- Right: Radial Menu -->
+        <div class="task-content-wrapper"
+          style="flex: 1; position: relative; display: flex; justify-content: center; align-items: center;">
+          <div class="radial-menu-container active" style="width: 700px; height: 700px;">
+            <div class="radial-center-btn" onclick="toggleRadialGradeMenu(this)"
+              style="cursor: pointer; width:160px; height:160px; font-size:22px; background: linear-gradient(135deg, #a855f7 0%, #6d28d9 100%);">
+              Дауыспен жумыс</div>
+
+            <!-- Task 1: Дауыстап -->
+            <div class="radial-item" style="--angle: 0deg; --dist: 220px;" onclick="showScreen('g0DauyspTask1')">
+              <div>📢</div>
+              <p>Дауыстап</p>
+            </div>
+            <!-- Task 2: Жай -->
+            <div class="radial-item" style="--angle: 120deg; --dist: 220px;" onclick="showScreen('g0DauyspTask2')">
+              <div>🗣️</div>
+              <p>Жай</p>
+            </div>
+            <!-- Task 3: Сыбырлап -->
+            <div class="radial-item" style="--angle: 240deg; --dist: 220px;" onclick="showScreen('g0DauyspTask3')">
+              <div>🤫</div>
+              <p>Сыбырлап</p>
+            </div>
+          </div>
+          <!-- Back Button -->
+          <button class="btn btn-secondary" onclick="playClick(); showScreen('grade0Menu')"
+            style="position: absolute; bottom: 20px; left: 20px; z-index: 100;">⬅️ Артқа</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grade 0 - Дауыспен жумыс Task 1: Дауыстап -->
+    <div id="g0DauyspTask1" class="screen">
+      <div class="task-flex-container" style="display: flex; height: 100vh; width: 100%; overflow: hidden;">
+        <div class="alippe-panel">
+          <div class="alippe-header">Әліппе</div>
+          <div class="alippe-grid"></div>
+        </div>
+        <div class="task-content-wrapper"
+          style="flex: 1; position: relative; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+          <div class="task-box" style="background: none; box-shadow: none; max-width: 680px; text-align: center;">
+            <h2>📢 Дауыстап</h2>
+            <p class="instruction">Суретте не бар? Дауыстап айтыңыз!</p>
+
+            <div style="font-size: 120px; margin: 30px 0;" id="dauysTapEmoji">🍎</div>
+            <div id="dauysTapWord" style="font-size: 36px; font-weight: bold; color: #fff; margin-bottom: 20px;">АЛМА
+            </div>
+
+            <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px;">
+              <button class="btn btn-success" onclick="nextDauysTapCard()"
+                style="font-size:20px; padding: 14px 32px;">▶️ Келесі сурет</button>
+              <button class="btn btn-success" onclick="playDauysTapSound()"
+                style="font-size:20px; padding: 14px 32px; background: linear-gradient(135deg,#a855f7,#6d28d9);">🔊
+                Тыңда</button>
+            </div>
+
+            <p style="color: rgba(255,255,255,0.7); font-size: 16px;">🎤 Суретті дауыстап, анық айтыңыз!</p>
+            <div id="dauysTapFeedback" class="feedback"></div>
+          </div>
+          <button class="btn btn-secondary" onclick="playClick(); showScreen('grade0DauyspenmMenu')"
+            style="position: absolute; bottom: 20px; left: 20px;">⬅️ Артқа</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grade 0 - Дауыспен жумыс Task 2: Жай -->
+    <div id="g0DauyspTask2" class="screen">
+      <div class="task-flex-container" style="display: flex; height: 100vh; width: 100%; overflow: hidden;">
+        <div class="alippe-panel">
+          <div class="alippe-header">Әліппе</div>
+          <div class="alippe-grid"></div>
+        </div>
+        <div class="task-content-wrapper"
+          style="flex: 1; position: relative; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+          <div class="task-box" style="background: none; box-shadow: none; max-width: 680px; text-align: center;">
+            <h2>🗣️ Жай</h2>
+            <p class="instruction">Суретте не бар? Жай (қалыпты) дауыспен айтыңыз!</p>
+
+            <div style="font-size: 120px; margin: 30px 0;" id="dауysZhayEmoji">🐱</div>
+            <div id="dауysZhayWord" style="font-size: 36px; font-weight: bold; color: #fff; margin-bottom: 20px;">МЫСЫҚ
+            </div>
+
+            <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px;">
+              <button class="btn btn-success" onclick="nextDauysZhayCard()"
+                style="font-size:20px; padding: 14px 32px;">▶️ Келесі сурет</button>
+              <button class="btn btn-success" onclick="playDauysZhaySound()"
+                style="font-size:20px; padding: 14px 32px; background: linear-gradient(135deg,#10b981,#047857);">🔊
+                Тыңда</button>
+            </div>
+
+            <p style="color: rgba(255,255,255,0.7); font-size: 16px;">🗣️ Жай дауыспен, мысалы: телефонда сөйлегендей!
+            </p>
+            <div id="dauysZhayFeedback" class="feedback"></div>
+          </div>
+          <button class="btn btn-secondary" onclick="playClick(); showScreen('grade0DauyspenmMenu')"
+            style="position: absolute; bottom: 20px; left: 20px;">⬅️ Артқа</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grade 0 - Дауыспен жумыс Task 3: Сыбырлап -->
+    <div id="g0DauyspTask3" class="screen">
+      <div class="task-flex-container" style="display: flex; height: 100vh; width: 100%; overflow: hidden;">
+        <div class="alippe-panel">
+          <div class="alippe-header">Әліппе</div>
+          <div class="alippe-grid"></div>
+        </div>
+        <div class="task-content-wrapper"
+          style="flex: 1; position: relative; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+          <div class="task-box" style="background: none; box-shadow: none; max-width: 680px; text-align: center;">
+            <h2>🤫 Сыбырлап</h2>
+            <p class="instruction">Суретте не бар? Сыбырлап айтыңыз!</p>
+
+            <div style="font-size: 120px; margin: 30px 0;" id="dауysSybyrEmoji">🐹</div>
+            <div id="dауysSybyrWord" style="font-size: 36px; font-weight: bold; color: #fff; margin-bottom: 20px;">ТИІН
+            </div>
+
+            <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px;">
+              <button class="btn btn-success" onclick="nextDauysSybyrCard()"
+                style="font-size:20px; padding: 14px 32px;">▶️ Келесі сурет</button>
+              <button class="btn btn-success" onclick="playDauysSybyrSound()"
+                style="font-size:20px; padding: 14px 32px; background: linear-gradient(135deg,#f59e0b,#b45309);">🔊
+                Тыңда</button>
+            </div>
+
+            <p style="color: rgba(255,255,255,0.7); font-size: 16px;">🤫 Сыбырлап, тым ақырын айтыңыз — бірақ анық!</p>
+            <div id="dauysSybyrFeedback" class="feedback"></div>
+          </div>
+          <button class="btn btn-secondary" onclick="playClick(); showScreen('grade0DauyspenmMenu')"
+            style="position: absolute; bottom: 20px; left: 20px;">⬅️ Артқа</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         Grade 0 — ДАУЫС ШАҚЫРУ  (подменю)
+         ============================================================ -->
+    <div id="grade0DauysShakMenu" class="screen">
+      <div class="task-flex-container" style="display: flex; height: 100vh; width: 100%; overflow: hidden;">
+        <!-- Left: Alippe -->
+        <div class="alippe-panel">
+          <div class="alippe-header">Әліппе</div>
+          <div class="alippe-grid"></div>
+        </div>
+        <!-- Right: Radial Menu -->
+        <div class="task-content-wrapper"
+          style="flex: 1; position: relative; display: flex; justify-content: center; align-items: center;">
+          <div class="radial-menu-container active" style="width: 700px; height: 700px;">
+            <div class="radial-center-btn" onclick="toggleRadialGradeMenu(this)"
+              style="cursor: pointer; width:160px; height:160px; font-size:22px; background: linear-gradient(135deg, #f97316 0%, #b45309 100%);">
+              Дауыс шақыру</div>
+
+            <!-- Жаттығу -->
+            <div class="radial-item" style="--angle: 90deg; --dist: 220px;" onclick="showScreen('g0DShakJattugu')">
+              <div>🏋️</div>
+              <p>Жаттығу</p>
+            </div>
+            <!-- Тапсырма -->
+            <div class="radial-item" style="--angle: 270deg; --dist: 220px;" onclick="showScreen('g0DShakTapsyrma')">
+              <div>📝</div>
+              <p>Тапсырма</p>
+            </div>
+          </div>
+          <!-- Back Button -->
+          <button class="btn btn-secondary" onclick="playClick(); showScreen('grade0Menu')"
+            style="position: absolute; bottom: 20px; left: 20px; z-index: 100;">⬅️ Артқа</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         Grade 0 — ДАУЫС ШАҚЫРУ — Жаттығу
+         ============================================================ -->
+    <div id="g0DShakJattugu" class="screen">
+      <div class="task-flex-container" style="display: flex; height: 100vh; width: 100%; overflow: hidden;">
+        <div class="alippe-panel">
+          <div class="alippe-header">Әліппе</div>
+          <div class="alippe-grid"></div>
+        </div>
+        <div class="task-content-wrapper"
+          style="flex: 1; position: relative; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+          <div class="task-box" style="background: none; box-shadow: none; max-width: 680px; text-align: center;">
+            <h2>🏋️ Дауыс шақыру — Жаттығу</h2>
+            <p class="instruction">Экрандағы сөздерді дауыстап оқыңыз және дыбысты қайталаңыз!</p>
+
+            <!-- Карточка -->
+            <div id="dshakJatEmojiBox" style="font-size: 110px; margin: 20px 0;">🐸</div>
+            <div id="dshakJatWord"
+              style="font-size: 38px; font-weight: bold; color: #fff; letter-spacing: 4px; margin-bottom: 8px;">БАҚА
+            </div>
+            <div id="dshakJatHint" style="font-size: 20px; color: rgba(255,255,255,0.65); margin-bottom: 24px;"></div>
+
+            <!-- Кнопки -->
+            <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 16px;">
+              <button class="btn btn-success" onclick="dshakJatNext()" style="font-size:19px; padding:13px 30px;">▶️
+                Келесі</button>
+              <button class="btn btn-success" onclick="dshakJatPlay()"
+                style="font-size:19px; padding:13px 30px; background: linear-gradient(135deg,#f97316,#b45309);">🔊
+                Тыңда</button>
+            </div>
+
+            <!-- Progress -->
+            <div id="dshakJatProgress" style="font-size:15px; color:rgba(255,255,255,0.5); margin-bottom: 6px;">1 / 10
+            </div>
+
+            <p style="color: rgba(255,255,255,0.6); font-size: 15px;">🎤 Суретті анық, қатты дауыспен айтып көріңіз!</p>
+            <div id="dshakJatFeedback" class="feedback"></div>
+          </div>
+          <button class="btn btn-secondary" onclick="playClick(); showScreen('grade0DauysShakMenu')"
+            style="position: absolute; bottom: 20px; left: 20px;">⬅️ Артқа</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         Grade 0 — ДАУЫС ШАҚЫРУ — Тапсырма
+         ============================================================ -->
+    <div id="g0DShakTapsyrma" class="screen">
+      <div class="task-flex-container" style="display: flex; height: 100vh; width: 100%; overflow: hidden;">
+        <div class="alippe-panel">
+          <div class="alippe-header">Әліппе</div>
+          <div class="alippe-grid"></div>
+        </div>
+        <div class="task-content-wrapper"
+          style="flex: 1; position: relative; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+          <div class="task-box" style="background: none; box-shadow: none; max-width: 720px; text-align: center;">
+            <h2>📝 Дауыс шақыру — Тапсырма</h2>
+            <p class="instruction">Дыбысты тыңдап, қай сурет сәйкес келеді — таңдаңыз!</p>
+
+            <!-- Играющий звук -->
+            <div id="dshakTapSoundBtn"
+              style="font-size: 80px; cursor: pointer; margin: 16px 0; transition: transform .15s;"
+              onclick="dshakTapPlaySound()" title="Тыңда">
+              🔊
+            </div>
+            <div id="dshakTapRoundInfo" style="font-size:15px; color:rgba(255,255,255,0.5); margin-bottom:18px;">Раунд 1
+              / 6</div>
+
+            <!-- Варианты ответа (2×2 grid) -->
+            <div id="dshakTapChoices"
+              style="display: grid; grid-template-columns: repeat(2, 140px); gap: 18px; justify-content: center; margin-bottom: 20px;">
+            </div>
+
+            <!-- Feedback -->
+            <div id="dshakTapFeedback" class="feedback" style="min-height: 32px;"></div>
+            <!-- Score -->
+            <div id="dshakTapScore" style="font-size: 18px; color: #fde68a; margin-top: 6px;">⭐ 0 / 6</div>
+          </div>
+          <button class="btn btn-secondary" onclick="playClick(); dshakTapStop(); showScreen('grade0DauysShakMenu')"
+            style="position: absolute; bottom: 20px; left: 20px;">⬅️ Артқа</button>
         </div>
       </div>
     </div>
@@ -938,6 +1210,11 @@
               <div>🎭</div>
               <p>Ертегілер</p>
             </div>
+            <div class="radial-item" style="--angle: 315deg; --dist: 220px;"
+              onclick="initArticulationMap(); showScreen('g0ArticulationMap')">
+              <div>👄</div>
+              <p>Дыбыс картасы</p>
+            </div>
           </div>
           <!-- Back Button -->
           <button class="btn btn-secondary" onclick="playClick(); showScreen('levelsScreen')"
@@ -1265,6 +1542,11 @@
               <div>🎤</div>
               <p>Әндер</p>
             </div>
+            <div class="radial-item" style="--angle: 324deg; --dist: 220px;"
+              onclick="initArticulationMap(); showScreen('g0ArticulationMap')">
+              <div>👄</div>
+              <p>Дыбыс картасы</p>
+            </div>
           </div>
           <!-- Back Button -->
           <button class="btn btn-secondary" onclick="playClick(); showScreen('levelsScreen')"
@@ -1515,6 +1797,11 @@
             <div class="radial-item" style="--angle: 288deg; --dist: 220px;" onclick="showScreen('g4Task6')">
               <div>🧭</div>
               <p>Бағыт</p>
+            </div>
+            <div class="radial-item" style="--angle: 324deg; --dist: 220px;"
+              onclick="initArticulationMap(); showScreen('g0ArticulationMap')">
+              <div>👄</div>
+              <p>Дыбыс картасы</p>
             </div>
           </div>
           <!-- Back Button -->
@@ -2217,6 +2504,250 @@
   <script src="scroll-header.js"></script>
   <script src="grade234-functions.js"></script>
   <script src="articulation-circles.js"></script>
+
+  <script>
+    /* ============================================================
+       ДАУЫСПЕН ЖУМЫС — Shared card data
+       ============================================================ */
+    var dauyspCards = [
+      { emoji: '🍎', word: 'АЛМА' },
+      { emoji: '🐂', word: 'ӨГІЗ' },
+      { emoji: '🌸', word: 'ГҮЛ' },
+      { emoji: '🏠', word: 'ҮЙ' },
+      { emoji: '🐟', word: 'БАЛЫҚ' },
+      { emoji: '🌙', word: 'АЙ' },
+      { emoji: '🌲', word: 'АҒАШ' },
+      { emoji: '☀️', word: 'КҮН' },
+      { emoji: '🐓', word: 'ТАУЫҚ' },
+      { emoji: '🍞', word: 'НАН' },
+    ];
+
+    var zhayCards = [
+      { emoji: '🐱', word: 'МЫСЫҚ' },
+      { emoji: '🐶', word: 'ИТ' },
+      { emoji: '🐄', word: 'СИЫР' },
+      { emoji: '🐑', word: 'ҚОЙ' },
+      { emoji: '🐴', word: 'АТ' },
+      { emoji: '🦊', word: 'ТҮЛКІ' },
+      { emoji: '🐻', word: 'АЮ' },
+      { emoji: '🐰', word: 'ҚОЯН' },
+      { emoji: '🦁', word: 'АРЫСТАН' },
+      { emoji: '🐘', word: 'ПІЛІШ' },
+    ];
+
+    var sybyrCards = [
+      { emoji: '🐹', word: 'ТИІН' },
+      { emoji: '🐝', word: 'АРА' },
+      { emoji: '🦋', word: 'КӨБЕЛЕК' },
+      { emoji: '🌺', word: 'РАУШАН' },
+      { emoji: '🍇', word: 'ЖҮЗІМ' },
+      { emoji: '🍉', word: 'ҚАРБЫЗ' },
+      { emoji: '🌟', word: 'ЖҰЛДЫЗ' },
+      { emoji: '🌈', word: 'КЕМПІРҚОСАҚ' },
+      { emoji: '🐛', word: 'ЖҰЛДЫРЫМ' },
+      { emoji: '🧸', word: 'АЮША' },
+    ];
+
+    var dauysTapIdx = 0;
+    var dauysZhayIdx = 0;
+    var dauysSybyrIdx = 0;
+
+    /* --- Дауыстап --- */
+    function nextDauysTapCard() {
+      dauysTapIdx = (dauysTapIdx + 1) % dauyspCards.length;
+      document.getElementById('dauysTapEmoji').textContent = dauyspCards[dauysTapIdx].emoji;
+      document.getElementById('dauysTapWord').textContent = dauyspCards[dauysTapIdx].word;
+      if (typeof playClick === 'function') playClick();
+    }
+    function playDauysTapSound() {
+      var w = dauyspCards[dauysTapIdx].word;
+      var u = new SpeechSynthesisUtterance(w);
+      u.lang = 'kk-KZ';
+      u.rate = 0.9;
+      u.volume = 1.0;
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(u);
+    }
+
+    /* --- Жай --- */
+    function nextDauysZhayCard() {
+      dauysZhayIdx = (dauysZhayIdx + 1) % zhayCards.length;
+      var emojiEl = document.getElementById('dауysZhayEmoji') || document.getElementById('dauysZhayEmoji');
+      var wordEl = document.getElementById('dауysZhayWord') || document.getElementById('dauysZhayWord');
+      if (emojiEl) emojiEl.textContent = zhayCards[dauysZhayIdx].emoji;
+      if (wordEl) wordEl.textContent = zhayCards[dauysZhayIdx].word;
+      if (typeof playClick === 'function') playClick();
+    }
+    function playDauysZhaySound() {
+      var w = zhayCards[dauysZhayIdx].word;
+      var u = new SpeechSynthesisUtterance(w);
+      u.lang = 'kk-KZ';
+      u.rate = 0.75;
+      u.volume = 0.85;
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(u);
+    }
+
+    /* --- Сыбырлап --- */
+    function nextDauysSybyrCard() {
+      dauysSybyrIdx = (dauysSybyrIdx + 1) % sybyrCards.length;
+      var emojiEl = document.getElementById('dауysSybyrEmoji') || document.getElementById('dauysSybyrEmoji');
+      var wordEl = document.getElementById('dауysSybyrWord') || document.getElementById('dauysSybyrWord');
+      if (emojiEl) emojiEl.textContent = sybyrCards[dauysSybyrIdx].emoji;
+      if (wordEl) wordEl.textContent = sybyrCards[dauysSybyrIdx].word;
+      if (typeof playClick === 'function') playClick();
+    }
+    function playDauysSybyrSound() {
+      var w = sybyrCards[dauysSybyrIdx].word;
+      var u = new SpeechSynthesisUtterance(w);
+      u.lang = 'kk-KZ';
+      u.rate = 0.6;
+      u.volume = 0.4;   /* тихий — имитация шёпота */
+      u.pitch = 0.8;
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(u);
+    }
+
+    /* ============================================================
+       ДАУЫС ШАҚЫРУ — Жаттығу
+       ============================================================ */
+    var dshakJatCards = [
+      { emoji: '🐸', word: 'БАҚА', hint: 'ба-қа' },
+      { emoji: '🌺', word: 'ГҮЛ', hint: 'гүл' },
+      { emoji: '🏠', word: 'ҮЙ', hint: 'үй' },
+      { emoji: '🐄', word: 'СИЫР', hint: 'си-ыр' },
+      { emoji: '🌙', word: 'АЙ', hint: 'ай' },
+      { emoji: '🍎', word: 'АЛМА', hint: 'ал-ма' },
+      { emoji: '🐟', word: 'БАЛЫҚ', hint: 'ба-лық' },
+      { emoji: '🌲', word: 'АҒАШ', hint: 'а-ғаш' },
+      { emoji: '☀️', word: 'КҮН', hint: 'күн' },
+      { emoji: '🐴', word: 'АТ', hint: 'ат' },
+    ];
+    var dshakJatIdx = 0;
+
+    function dshakJatRender() {
+      var c = dshakJatCards[dshakJatIdx];
+      document.getElementById('dshakJatEmojiBox').textContent = c.emoji;
+      document.getElementById('dshakJatWord').textContent = c.word;
+      document.getElementById('dshakJatHint').textContent = '[ ' + c.hint + ' ]';
+      document.getElementById('dshakJatProgress').textContent =
+        (dshakJatIdx + 1) + ' / ' + dshakJatCards.length;
+      document.getElementById('dshakJatFeedback').textContent = '';
+    }
+    function dshakJatNext() {
+      dshakJatIdx = (dshakJatIdx + 1) % dshakJatCards.length;
+      dshakJatRender();
+      if (typeof playClick === 'function') playClick();
+    }
+    function dshakJatPlay() {
+      var w = dshakJatCards[dshakJatIdx].word;
+      var u = new SpeechSynthesisUtterance(w);
+      u.lang = 'kk-KZ'; u.rate = 0.85; u.volume = 1;
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(u);
+    }
+    /* Init on screen show — hook into showScreen if possible */
+    (function () {
+      var orig = window.showScreen;
+      window.showScreen = function (id) {
+        if (typeof orig === 'function') orig(id);
+        if (id === 'g0DShakJattugu') { dshakJatIdx = 0; dshakJatRender(); }
+        if (id === 'g0DShakTapsyrma') { dshakTapStart(); }
+      };
+    })();
+
+    /* ============================================================
+       ДАУЫС ШАҚЫРУ — Тапсырма (угадай слово по звуку)
+       ============================================================ */
+    var dshakTapData = [
+      { emoji: '🐸', word: 'БАҚА', distractors: ['🐟', '🐴', '🌺'] },
+      { emoji: '🌺', word: 'ГҮЛ', distractors: ['🍎', '🏠', '🌲'] },
+      { emoji: '🍎', word: 'АЛМА', distractors: ['🌙', '🐄', '🐸'] },
+      { emoji: '🐴', word: 'АТ', distractors: ['☀️', '🐟', '🏠'] },
+      { emoji: '🌙', word: 'АЙ', distractors: ['🌺', '🐸', '🍎'] },
+      { emoji: '🏠', word: 'ҮЙ', distractors: ['🐴', '🌙', '🐄'] },
+    ];
+    var dshakTapRound = 0;
+    var dshakTapScore_v = 0;
+    var dshakTapDone = false;
+    var dshakTapUtter = null;
+
+    function dshakTapStart() {
+      dshakTapRound = 0;
+      dshakTapScore_v = 0;
+      dshakTapDone = false;
+      dshakTapRender();
+    }
+    function dshakTapStop() {
+      window.speechSynthesis.cancel();
+    }
+    function dshakTapRender() {
+      if (dshakTapRound >= dshakTapData.length) {
+        dshakTapDone = true;
+        document.getElementById('dshakTapChoices').innerHTML = '';
+        document.getElementById('dshakTapSoundBtn').textContent = '🏆';
+        document.getElementById('dshakTapRoundInfo').textContent = 'Аяқталды!';
+        document.getElementById('dshakTapFeedback').textContent =
+          '🎉 Жарайсың! ' + dshakTapScore_v + ' / ' + dshakTapData.length + ' дұрыс жауап!';
+        document.getElementById('dshakTapScore').textContent =
+          '⭐ ' + dshakTapScore_v + ' / ' + dshakTapData.length;
+        return;
+      }
+      var d = dshakTapData[dshakTapRound];
+      document.getElementById('dshakTapSoundBtn').textContent = '🔊';
+      document.getElementById('dshakTapRoundInfo').textContent =
+        'Раунд ' + (dshakTapRound + 1) + ' / ' + dshakTapData.length;
+      document.getElementById('dshakTapFeedback').textContent = '';
+      document.getElementById('dshakTapScore').textContent =
+        '⭐ ' + dshakTapScore_v + ' / ' + dshakTapData.length;
+      /* shuffle choices */
+      var choices = [d.emoji].concat(d.distractors.slice(0, 3));
+      choices.sort(function () { return Math.random() - 0.5; });
+      var html = '';
+      choices.forEach(function (em) {
+        var isCorrect = em === d.emoji;
+        html += '<button onclick="dshakTapCheck(this,' + isCorrect + ')" ' +
+          'style="font-size:60px;background:rgba(255,255,255,0.1);border:2px solid rgba(255,255,255,0.3);' +
+          'border-radius:16px;cursor:pointer;padding:10px;width:130px;height:130px;transition:transform .12s;"' +
+          ' onmouseover="this.style.transform=\'scale(1.08)\'" onmouseout="this.style.transform=\'scale(1)\'">' +
+          em + '</button>';
+      });
+      document.getElementById('dshakTapChoices').innerHTML = html;
+      /* auto-play */
+      setTimeout(function () { dshakTapPlaySound(); }, 400);
+    }
+    function dshakTapPlaySound() {
+      if (dshakTapDone || dshakTapRound >= dshakTapData.length) return;
+      var d = dshakTapData[dshakTapRound];
+      var u = new SpeechSynthesisUtterance(d.word);
+      u.lang = 'kk-KZ'; u.rate = 0.8; u.volume = 1;
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(u);
+    }
+    function dshakTapCheck(btn, isCorrect) {
+      /* disable all buttons */
+      var btns = document.getElementById('dshakTapChoices').querySelectorAll('button');
+      btns.forEach(function (b) { b.disabled = true; });
+      if (isCorrect) {
+        btn.style.background = 'rgba(52,211,153,0.4)';
+        btn.style.border = '2px solid #34d399';
+        dshakTapScore_v++;
+        document.getElementById('dshakTapFeedback').textContent = '✅ Дұрыс!';
+        document.getElementById('dshakTapFeedback').style.color = '#34d399';
+      } else {
+        btn.style.background = 'rgba(239,68,68,0.35)';
+        btn.style.border = '2px solid #ef4444';
+        document.getElementById('dshakTapFeedback').textContent = '❌ Қате! Тағы тыңдап көр.';
+        document.getElementById('dshakTapFeedback').style.color = '#f87171';
+      }
+      document.getElementById('dshakTapScore').textContent =
+        '⭐ ' + dshakTapScore_v + ' / ' + dshakTapData.length;
+      setTimeout(function () {
+        dshakTapRound++;
+        dshakTapRender();
+      }, 1200);
+    }
+  </script>
 </body>
 
 </html>

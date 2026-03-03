@@ -1,4 +1,4 @@
-﻿/* ========== GLOBAL STYLES ========== */
+/* ========== GLOBAL STYLES ========== */
 * {
   margin: 0;
   padding: 0;
@@ -14,6 +14,7 @@ body {
   flex-direction: column;
   overflow-x: hidden;
   color: #333;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 /* Glassmorphism: Remove solid white backgrounds */
